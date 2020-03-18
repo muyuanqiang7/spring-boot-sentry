@@ -179,7 +179,7 @@
     <!-- Configure the Sentry appender, overriding the logging threshold to the WARN level -->
     <appender name="Sentry" class="io.sentry.logback.SentryAppender">
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
-            <level>ERROR</level>
+            <level>INFO</level>
         </filter>
         <!-- Optionally add an encoder -->
         <encoder>
@@ -193,8 +193,16 @@
         <appender-ref ref="INFO_FILE"/>
         <appender-ref ref="WARN_FILE"/>
         <appender-ref ref="ERROR_FILE"/>
-        <appender-ref ref="Sentry"/>
     </root>
+
+    <logger name="com.huiztech.muyq.spring.boot.sentry" level="INFO" additivity="false">
+        <appender-ref ref="Sentry" />
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="DEBUG_FILE"/>
+        <appender-ref ref="INFO_FILE"/>
+        <appender-ref ref="WARN_FILE"/>
+        <appender-ref ref="ERROR_FILE"/>
+    </logger>
 
     <!--生产环境:输出到文件-->
     <!--<springProfile name="pro">-->
